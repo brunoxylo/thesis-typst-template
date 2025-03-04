@@ -9,13 +9,13 @@
 
 #let mainLayoutConfig(doc) = [
   #set page(
-    margin: (left: 42mm, right: 42mm, top: 39mm, bottom: 39mm),
+    margin: (left: 40mm, right: 35mm, top: 39mm, bottom: 39mm),
     number-align: center,
   )
 
   #set text(
-    font: body-font, 
-    size: defaultTextSize, 
+    font: body-font,
+    size: defaultTextSize,
     lang: language
   )
 
@@ -46,7 +46,7 @@
         rows: 2,
         row-gutter: 10pt,
         text(upper(it.body)),
-        line(length: 100%),
+        line(length: 100%, stroke: (0.5pt + black)),
       )
     } else if it.level == 2 { // Section heading
       set text(font: body-font, weight: "semibold", size: 10pt)
@@ -65,7 +65,7 @@
   }
 
   // Set big page number to the top of pages (aka. header) where a new chapter starts
-  #set page(header-ascent: 40%)
+  #set page(header-ascent: 30%)
   #set page(
     header: context {
       // Find first heading of level 1 on current page
@@ -94,8 +94,9 @@
         if first-heading.numbering != none {
           // If there is a level one heading (chapter heading) on this page, set the header
           let headerText = align(
-            left,
+            right,
             text(
+              baseline: 15pt,
               size: 70pt,
               fill: luma(120),
               numbering(first-heading.numbering,..counter(heading).at(first-heading.location()))
@@ -124,8 +125,11 @@
   }
 
   // --- Paragraphs ---
-  #set par(leading: 1em)
-  #set par(justify: true)
+  #set par(
+    leading: 0.6em,
+    justify: true,
+    spacing: 1.5em
+  )
 
   // --- Citations ---
   #set cite(style: "alphanumeric")
