@@ -20,7 +20,7 @@
   grid(
       columns: (2fr, 1fr, 2fr),
       rows: (50pt, 10pt, 15pt),
-      align(left, text(style: "italic", location + ", " + submissionDate)), "", align(bottom, align(center, image("../figures/signature.png", height: 100%))),
+      align(left, text(style: "italic", location + ", " + submissionDate)), "", align(bottom, align(center, image("../figures/signature.png", height: 60%))),
       "", "", line(length: 140pt),
       "", "", align(center, author)
   )
