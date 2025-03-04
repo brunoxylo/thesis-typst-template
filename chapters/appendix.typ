@@ -1,7 +1,6 @@
 #import "@preview/glossarium:0.2.6": make-glossary, print-glossary, gls, glspl
 #import "../thesis_typ/helper-functions.typ": *
 
-/*------------------------------------------------------------------------------------------------------------------*/
 #heading([Appendix: Zusatzmaterial])
 == Java Beispiel
 #figure(

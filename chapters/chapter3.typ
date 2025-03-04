@@ -1,58 +1,70 @@
 #import "@preview/glossarium:0.2.6": make-glossary, print-glossary, gls, glspl
 #import "../thesis_typ/helper-functions.typ": *
+
 = Ein weiteres Kapitel
 <ch:literature:chapter3>
+
 #lorem(100)
-== Listen
-Enumeration with bullets
+
+== Listings
+
+Enumeration with bullets: \
 - #lorem(10)
 - #lorem(10)
 - #lorem(10)
 
-Enumeration with numbers
+Enumeration with numbers: \
 + #lorem(10)
 + #lorem(10)
 + #lorem(10)
 
-== Grafiken
-Try to use SVGs for the figures. They are vector graphics and can be scaled without loss of quality.\
-You can export a chart as svg in powerpoint by right clicking on it and selecting "Save as Picture".\
-Then select "SVG" as file format.
-Alternatively,  PNG, JPEG, GIF are supported by typst.\
+== Graphics
+Try to use SVGs for the figures. They are vector graphics and can be scaled without loss of quality. \
+You can export a chart as svg in powerpoint by right clicking on it and selecting "Save as Picture". \
+Then select "SVG" as file format. \
+Alternatively, PNG, JPEG, GIF are supported by typst. \
+
 #figure(
   image("../figures/figure1.svg", width: 100%),
   caption: [A generic chart],
 ) <fig:chart1>
+
 #v(10pt)
+
 #figure(
   image("../figures/figure2.svg", width: 100%),
-  caption: [An other generic chart],
+  caption: [Another generic chart],
 ) <fig:chart1>
+
 #pagebreak()
 
-== Tabellen
+== Tables
 #figure(
   table(
-    columns: (1fr, auto, auto),
+    columns: (auto, auto, auto),
     inset: 10pt,
     align: horizon,
-    [], [*Area*], [*Parameters*],
+
+    [],
+    [*Area*],
+    [*Parameters*],
+
     [cylinder],
-    $ pi h (D^2 - d^2) / 4 $,
+    [$ pi h (D^2 - d^2) / 4 $],
     [
       $h$: height \
       $D$: outer radius \
       $d$: inner radius
     ],
-  [tetrahedron],
-    $ sqrt(2) / 12 a^3 $,
+
+    [tetrahedron],
+    [$sqrt(2) / 12 a^3 $],
     [$a$: edge length]
   ),
   caption: [A table example],
-)<tab:table1>
+) <tab:table1>
 
-== Standardabweichung
+== Standard deviation
 <formula:formulas_stddev>
-(vgl. @corder_2014 ch. 2.3)\
 \
-$s = sqrt( sum_(1)^n (x_i - overline(x))^2  / (n-1) )$
+$s = sqrt( sum_(1)^n (x_i - overline(x))^2 / (n-1) )$
