@@ -1,4 +1,4 @@
-// A implementation of the LaTeX `nameref` function in Typst
+// An implementation of the LaTeX `nameref` function in Typst
 // Example usage: #nameref(<ch:literature:review>)
 #let nameref(label) = {
   locate(loc => {

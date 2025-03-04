@@ -34,7 +34,7 @@
   hide(heading(numbering: none, outlined: false, bookmarked: true, "Titelblatt"))
 
   // --- Title Page ---
-  align(center, image("../figures/logo_h-da.svg", width: 46%))
+  align(center, image("../figures/logo_h-da.png", width: 46%))
 
   v(5mm)
 

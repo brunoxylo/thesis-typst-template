@@ -49,7 +49,7 @@ This template uses the [Glossarium library](https://typst.app/universe/package/g
 To use acronyms you need to import the library at the top of each chapter file and call the `gls` function with the desired acronym:  
 
 ```typst
-#import "@preview/glossarium:0.5.1": gls, glspl
+#import "@preview/glossarium:0.5.3": gls, glspl
 
 // Usage:
 #gls("DRY")

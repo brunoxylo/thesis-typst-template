@@ -1,4 +1,4 @@
-#import "@preview/glossarium:0.2.6": make-glossary, print-glossary, gls, glspl
+#import "@preview/glossarium:0.5.3": gls, glspl
 #import "../thesis_typ/helper-functions.typ": *
 
 = Einleitung
@@ -20,10 +20,11 @@ Additionally you can omit the default prefix (chapter or figure) when referencin
 
 == Gliederung
 #lorem(10)
-#gls("API")
+#gls("API", long: true)
 #lorem(10)
 #gls("UML")
 #lorem(10)
-#gls("UML")
+#glspl("UML")
+#glspl("UML", long: true)
 #lorem(10)
 @oracle_2014

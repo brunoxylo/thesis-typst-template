@@ -2,6 +2,11 @@
 #import "thesis_typ/main_layout_config.typ": *
 #import "thesis_typ/special_pages.typ": tableOfContents, tableOfTables, tableOfListings, tableOfFigures
 #import "frontbackmatter/acronyms.typ": tableOfAcronyms
+#import "@preview/glossarium:0.5.3": make-glossary, register-glossary, print-glossary, gls, glspl
+#import "frontbackmatter/acronyms.typ": glossary-list
+
+#show: make-glossary
+#register-glossary(glossary-list)
 
 #set document(title: title, author: author)
 

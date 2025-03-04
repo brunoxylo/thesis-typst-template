@@ -1,4 +1,4 @@
-#import "@preview/glossarium:0.2.6": make-glossary, print-glossary, gls, glspl
+#import "@preview/glossarium:0.5.3": make-glossary, print-glossary, gls, glspl
 #import "../thesis_typ/helper-functions.typ": *
 
 = Ein weiteres Kapitel
@@ -39,6 +39,7 @@ Alternatively, PNG, JPEG, GIF are supported by typst. \
 #pagebreak()
 
 == Tables
+
 #figure(
   table(
     columns: (auto, auto, auto),
@@ -66,5 +67,6 @@ Alternatively, PNG, JPEG, GIF are supported by typst. \
 
 == Standard deviation
 <formula:formulas_stddev>
+
 \
 $s = sqrt( sum_(1)^n (x_i - overline(x))^2 / (n-1) )$
