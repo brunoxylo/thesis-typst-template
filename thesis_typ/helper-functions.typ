@@ -1,9 +1,9 @@
 // An implementation of the LaTeX `nameref` function in Typst
 // Example usage: #nameref(<ch:literature:review>)
 #let nameref(label) = {
-  locate(loc => {
+  context {
     // Search for item referenced by the label
-    let elems = query(label,loc)
+    let elems = query(label)
     if (elems.len() == 0) {
       panic("#nameref: label <" + str(label) + "> not found")
     } else if (elems.len() > 1) {
@@ -44,7 +44,7 @@
     }
     let link = link(label, linkText)
     link
-  })
+  }
 }
 
 // Output code samples with line numbers

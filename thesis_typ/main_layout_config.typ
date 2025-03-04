@@ -1,10 +1,11 @@
-  #let body-font = "New Computer Modern"
-  #let defaultTextSize = 12pt
-  #let linkColor = rgb("#013f7d") // Color for links such as references to chapters or bib entries
+#let body-font = "New Computer Modern"
+#let sans-font = "Libertinus Serif"
+#let defaultTextSize = 12pt
+#let linkColor = rgb("#013f7d") // Color for links such as references to chapters or bib entries
 
-  // Language specific settings
-  #let language = "de"              // Change to "en" for english
-  #let chapterString = "Kapitel"    // Change to "Chapter" for english
+// Language specific settings
+#let language = "de"              // Change to "en" for english
+#let chapterString = "Kapitel"    // Change to "Chapter" for english
 
 #let mainLayoutConfig(doc) = [
   #set page(
@@ -23,7 +24,7 @@
   #show link: set text(fill: linkColor)
 
   // Change outline style
-  #set outline(
+  #set outline.entry(
     fill: box(width: 1fr, repeat("." + h(2mm)))
   )
 
@@ -66,47 +67,44 @@
   // Set big page number to the top of pages (aka. header) where a new chapter starts
   #set page(header-ascent: 40%)
   #set page(
-    header: locate(
-      loc => [
-        // Find first heading of level 1 on current page
-        #let first-heading = query(
-            heading.where(level: 1), loc).find(h => h.location().page() == loc.page())
-        #if first-heading == none {
-          let pageNum = loc.page()
-          // Try to find the first a second level heading on the current page
-          let current2ndHeadline = query(heading.where(level: 2), loc).find(h => h.location().page() == pageNum)
-          // Look for the latest second level heading on a previous page
-          while current2ndHeadline == none and pageNum > 0 {
-              current2ndHeadline = query(
-              heading.where(level: 2), loc).rev().find(h => h.location().page() == pageNum)
-              pageNum = pageNum - 1
-          }
-          // A second level heading found on current page or a page before
-          if current2ndHeadline != none and current2ndHeadline.numbering != none {
-            // If there is a level 2 heading on this page, set the header
-            let headerString = numbering(current2ndHeadline.numbering, ..counter(heading).at(current2ndHeadline.location())) + " " + current2ndHeadline.body
-            let headerText = align(
-              right,
-              text(size: 12pt, headerString)
-            )
-            headerText
-          }
-        } else {
-          if first-heading.numbering != none {
-            // If there is a level one heading (chapter heading) on this page, set the header
-            let headerText = align(
-              left,
-              text(
-                size: 70pt,
-                fill: luma(120),
-                numbering(first-heading.numbering,..counter(heading).at(first-heading.location()))
-              )
-            )
-            headerText
-          }
+    header: context {
+      // Find first heading of level 1 on current page
+      let first-heading = query(heading.where(level: 1)).find(h => h.location().page() == here().page())
+      if first-heading == none {
+        let pageNum = here().page()
+
+        // Try to find the first a second level heading on the current page
+        let current2ndHeadline = query(heading.where(level: 2)).find(h => h.location().page() == pageNum)
+
+        while current2ndHeadline == none and pageNum > 0 { // Look for the latest second level heading on a previous page
+            current2ndHeadline = query(heading.where(level: 2)).rev().find(h => h.location().page() == pageNum)
+            pageNum = pageNum - 1
         }
-      ]
-    )
+
+        if current2ndHeadline != none and current2ndHeadline.numbering != none { // A second level heading found on current page or a page before
+          // If there is a level 2 heading on this page, set the header
+          let headerString = numbering(current2ndHeadline.numbering, ..counter(heading).at(current2ndHeadline.location())) + " " + current2ndHeadline.body
+          let headerText = align(
+            right,
+            text(size: 12pt, headerString)
+          )
+          headerText
+        }
+      } else {
+        if first-heading.numbering != none {
+          // If there is a level one heading (chapter heading) on this page, set the header
+          let headerText = align(
+            left,
+            text(
+              size: 70pt,
+              fill: luma(120),
+              numbering(first-heading.numbering,..counter(heading).at(first-heading.location()))
+            )
+          )
+          headerText
+        }
+      }
+    }
   )
 
   // Reference first-level headings as "chapters"
