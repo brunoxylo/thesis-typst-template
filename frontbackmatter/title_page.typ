@@ -1,3 +1,5 @@
+#import "../thesis_typ/main_layout_config.typ": body-font, sans-font
+
 #let titlePage(
   title: "",
   degree: "",
@@ -18,9 +20,6 @@
 
   // Overwrite page number with empty string
   set page(footer: "")
-
-  let body-font = "New Computer Modern"
-  let sans-font = "New Computer Modern Sans"
 
   set text(
     font: body-font,
