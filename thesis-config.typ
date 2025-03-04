@@ -1,11 +1,11 @@
 // Enter your thesis data here:
-#let title = "A thesis template in typst"
+#let title = "A Thesis Template In Typst"
 #let degree = "Bachelor of Science (B.Sc.)"
 #let faculty = "Fachbereich Informatik"
 #let university = "Hochschule Darmstadt"
-#let myProf = "Prof. Dr. Martin Messbecher"
-#let myOtherProf = "Klaus Kleber"
+#let myProf = "Prof. Dr. Max Musterprof"
+#let myOtherProf = "Dr. Max Mustermensch"
 #let author = "Max Mustermann"
-#let id = "0815"    // matriculation number
+#let id = "0815" // Matriculation number
 #let location = "Darmstadt"
-#let submissionDate = "7. September 2024"
+#let submissionDate = "1. Januar 2025"
