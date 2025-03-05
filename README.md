@@ -11,6 +11,11 @@ This template might be used to write a bachelor or master thesis at the Computer
 
 A single typst binary (Linux/Mac/Windows) can be downloaded [here](https://github.com/typst/typst/releases)
 
+### Installing the Typst VSCode extension
+
+To make it easier working with typst in VSCode, you can install the [Tinymist Typst](https://marketplace.visualstudio.com/items?itemName=myriad-dreamin.tinymist) extension. It provides an LSP for Syntax highlighting, autocompletion and error checking. Also, a live preview of the document is available with which you can see the changes in real time and easily navigate through the document.  
+
+
 ## Configuration
 
 ### Thesis metadata config

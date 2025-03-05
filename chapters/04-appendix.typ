@@ -2,7 +2,7 @@
 
 #heading([Appendix: Zusatzmaterial])
 
-== Java Beispiel
+== Java Example
 
 #figure(
   displaycode(read("../figures/BubbleSort.java"), "java", textsize: 9pt),
