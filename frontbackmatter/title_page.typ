@@ -33,7 +33,8 @@
   hide(heading(numbering: none, outlined: false, bookmarked: true, "Titelblatt"))
 
   // --- Title Page ---
-  align(center, image("../figures/logo_h-da.png", width: 46%))
+  align(center, image("../figures/logo_h-da.svg", width: 52%))
+
 
   v(5mm)
 
@@ -58,11 +59,11 @@
   v(20mm)
 
   grid(
-    columns: (4fr, 4fr, 1fr),
+    columns: (1.7fr, 1.1fr, 0fr, 4fr),
     row-gutter: (10pt),
     column-gutter: (15pt),
-    align(right, strong("Referent    :")), text(myProf), "",
-    align(right, strong("Korreferent :")), text(myOtherProf), ""
+    "", align(left, strong("Referent")), ":", text(myProf),
+    "", align(left, strong("Korreferent")), ":", text(myOtherProf)
   )
   pagebreak()
 }
