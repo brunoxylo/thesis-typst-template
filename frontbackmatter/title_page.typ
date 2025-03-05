@@ -35,6 +35,7 @@
   // --- Title Page ---
   align(center, image("../figures/logo_h-da.svg", width: 52%))
 
+
   v(5mm)
 
   align(center, text(font: sans-font, 2em, weight: 700, university))
