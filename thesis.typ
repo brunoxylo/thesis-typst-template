@@ -67,9 +67,9 @@
 #counter(page).update(1)
 
 // Include your chapters here
-#include "./chapters/chapter1.typ"
-#include "./chapters/chapter2.typ"
-#include "./chapters/chapter3.typ"
-#include "./chapters/appendix.typ"
+#include "chapters/01-introduction.typ"
+#include "chapters/02-referencing-glossary.typ"
+#include "chapters/03-listings-graphics.typ"
+#include "chapters/04-appendix.typ"
 
 #bibliography("./thesis.bib", title: "Literaturverzeichnis", style: "./thesis_typ/springer-lecture-notes-in-computer-science.csl")
