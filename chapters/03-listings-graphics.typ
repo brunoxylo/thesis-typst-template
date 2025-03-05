@@ -43,28 +43,30 @@ Alternatively, PNG, JPEG, GIF are supported by typst. \
 == Tables
 You can use the table function to create tables. \
 
+#let example-table = table(
+  columns: (auto, auto, auto),
+  inset: 10pt,
+  align: horizon,
+
+  [],
+  [*Area*],
+  [*Parameters*],
+
+  [cylinder],
+  [$ pi h (D^2 - d^2) / 4 $],
+  [
+    $h$: height \
+    $D$: outer radius \
+    $d$: inner radius
+  ],
+
+  [tetrahedron],
+  [$sqrt(2) / 12 a^3 $],
+  [$a$: edge length]
+)
+
 #figure(
-  table(
-    columns: (auto, auto, auto),
-    inset: 10pt,
-    align: horizon,
-
-    [],
-    [*Area*],
-    [*Parameters*],
-
-    [cylinder],
-    [$ pi h (D^2 - d^2) / 4 $],
-    [
-      $h$: height \
-      $D$: outer radius \
-      $d$: inner radius
-    ],
-
-    [tetrahedron],
-    [$sqrt(2) / 12 a^3 $],
-    [$a$: edge length]
-  ),
+  example-table,
   caption: [A table example],
 ) <tab:table1>
 
@@ -218,39 +220,18 @@ You can for example combine tables and plots in a single figure. \
 
 #let horizontal-table(elem1, caption1, elem2, caption2) = {
   set image(width: 120%)
-  set table(stroke: (x, y) => {(0pt)})
-  set table(columns: (auto, 1em, auto))
-  set table(inset: (x: 0pt, y: 0pt))
+  set table(
+    stroke: (x, y) => {(0pt)},
+    columns: (auto, 1em, auto),
+    inset: 0pt,
+    align: horizon
+  )
 
   table(
-    align(horizon, pad(figure(elem1, caption: caption1), left: -20%)),
+    pad(figure(elem1, caption: caption1), left: -20%),
     "",
-    align(horizon, pad(figure(elem2, caption: caption2), right: -20%))
+    pad(figure(elem2, caption: caption2), right: -20%)
   )
 }
 
-#let example-table = table(
-  columns: (auto, auto, auto),
-  inset: 10pt,
-  align: horizon,
-
-  [],
-  [*Area*],
-  [*Parameters*],
-
-  [cylinder],
-  [$ pi h (D^2 - d^2) / 4 $],
-  [
-    $h$: height \
-    $D$: outer radius \
-    $d$: inner radius
-  ],
-
-  [tetrahedron],
-  [$sqrt(2) / 12 a^3 $],
-  [$a$: edge length]
-)
-
-#figure(
-  horizontal-table(image("../figures/example-graph.svg"), "Another plot example", example-table, "Another table example"),
-)
+#horizontal-table(image("../figures/example-graph.svg"), "Another plot example", example-table, "Another table example")
