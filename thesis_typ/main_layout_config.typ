@@ -42,25 +42,28 @@
     if it.level == 1 { // Chapter heading
       set text(font: body-font, weight: "thin", tracking: 0.13em, size: 12pt)
       pagebreak()
-      grid(
+      // Wrap in block (which is implicitly sticky for headings) to prevent orphan heading at end of page
+      block(grid(
         rows: 2,
         row-gutter: 10pt,
         text(upper(it.body)),
         line(length: 100%, stroke: (0.5pt + black)),
-      )
+      ))
     } else if it.level == 2 { // Section heading
       set text(font: body-font, weight: "semibold", size: 10pt)
       v(0.5em)
-      text(upper(numbering(it.numbering, ..counter(heading).at(it.location())) + " " + it.body))
-      v(0.5em)
-      parbreak()
+      // Wrap in block (which is implicitly sticky for headings) to prevent orphan heading at end of page
+      block(
+        text(upper(numbering(it.numbering, ..counter(heading).at(it.location())) + " " + it.body))
+      )
     }
     else {
       set text(font: body-font, style: "italic", weight: "thin", size: 11pt)
       v(0.5em)
-      text(upper(numbering(it.numbering, ..counter(heading).at(it.location())) + " " + it.body))
-      v(0.5em)
-      parbreak()
+      // Wrap in block (which is implicitly sticky for headings) to prevent orphan heading at end of page
+      block(
+        text(upper(numbering(it.numbering, ..counter(heading).at(it.location())) + " " + it.body))
+      )
     }
   }
 
