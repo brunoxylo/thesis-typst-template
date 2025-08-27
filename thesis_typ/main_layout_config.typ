@@ -69,40 +69,73 @@
   #set page(
     header: context {
       // Find first heading of level 1 on current page
-      let first-heading = query(heading.where(level: 1)).find(h => h.location().page() == here().page())
-      if first-heading == none {
-        let pageNum = here().page()
-
-        // Try to find the first a second level heading on the current page
-        let current2ndHeadline = query(heading.where(level: 2)).find(h => h.location().page() == pageNum)
-
-        while current2ndHeadline == none and pageNum > 0 { // Look for the latest second level heading on a previous page
-            current2ndHeadline = query(heading.where(level: 2)).rev().find(h => h.location().page() == pageNum)
-            pageNum = pageNum - 1
-        }
-
-        if current2ndHeadline != none and current2ndHeadline.numbering != none { // A second level heading found on current page or a page before
-          // If there is a level 2 heading on this page, set the header
-          let headerString = numbering(current2ndHeadline.numbering, ..counter(heading).at(current2ndHeadline.location())) + " " + current2ndHeadline.body
-          let headerText = align(
-            right,
-            text(size: 12pt, headerString)
-          )
-          headerText
-        }
-      } else {
-        if first-heading.numbering != none {
-          // If there is a level one heading (chapter heading) on this page, set the header
-          let headerText = align(
+      let heading-lvl-1 = query(heading.where(level: 1)).find(h => h.location().page() == here().page())
+      if heading-lvl-1 != none {
+        if heading-lvl-1.numbering != none {
+          // If there is a level 1 heading (chapter heading) on this page, set the header
+          let header-text = align(
             right,
             text(
               baseline: 15pt,
               size: 70pt,
               fill: luma(120),
-              numbering(first-heading.numbering,..counter(heading).at(first-heading.location()))
-            )
+              numbering(heading-lvl-1.numbering, ..counter(heading).at(heading-lvl-1.location())),
+            ),
           )
-          headerText
+          header-text
+        }
+      } else {
+        // Else find the closest lvl-2 heading within the same chapter;
+        // if there is none fall back to closest lvl-1 heading
+
+        let heading-lvl-2-selector = heading.where(level: 2)
+
+        // TODO: Remove once https://github.com/typst/typst/pull/5970 is available
+        let first-or-none(array) = {
+          if array.len() == 0 { none } else { array.first() }
+        }
+        let last-or-none(array) = {
+          if array.len() == 0 { none } else { array.last() }
+        }
+
+        // If there is a previous lvl-1 heading, ensure the lvl-2 heading comes afterwards
+        // (to avoid using unrelated lvl-2 heading if subsequent lvl-1 heading has no subheadings)
+        let last-heading-lvl-1 = last-or-none(query(heading.where(level: 1).before(here())))
+        if last-heading-lvl-1 != none {
+          heading-lvl-2-selector = heading-lvl-2-selector.after(last-heading-lvl-1.location())
+        }
+
+        let current-page = here().page()
+
+        // Get the first lvl-2 heading on the current page (if any)
+        let heading-lvl-2 = first-or-none(
+          query(heading-lvl-2-selector).filter(h => h.location().page() == current-page)
+        )
+
+        if heading-lvl-2 == none {
+          // Look for the last lvl-2 heading before the current page
+          heading-lvl-2 = last-or-none(
+            query(heading-lvl-2-selector).filter(h => h.location().page() < current-page),
+          )
+        }
+
+        let get-heading-text(h) = {
+          let header-string = (
+            numbering(h.numbering, ..counter(heading).at(h.location())) + " " + h.body
+          )
+
+          let header-text = align(
+            right,
+            text(size: 12pt, header-string),
+          )
+          header-text
+        }
+
+        if heading-lvl-2 != none and heading-lvl-2.numbering != none {
+          get-heading-text(heading-lvl-2)
+        } // Fall back to using lvl-1 heading if there is no lvl-2 heading
+        else if last-heading-lvl-1 != none and last-heading-lvl-1.numbering != none {
+          get-heading-text(last-heading-lvl-1)
         }
       }
     }
